@@ -3,7 +3,7 @@
 process checkM2 {
 
         cpus 8
-        memory '16 GB'
+        memory { assemblies.size() * 1.GB }
         container 'community.wave.seqera.io/library/checkm2:1.1.0--2155b1d4034fecdc'
 
         input:

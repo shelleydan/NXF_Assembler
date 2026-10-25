@@ -1,0 +1,99 @@
+Oct-23 11:45:01.052 [main] DEBUG nextflow.cli.Launcher - $> nextflow run bandage/main.nf -c ../nextflow.config
+Oct-23 11:45:01.146 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.04.3
+Oct-23 11:45:01.169 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/c2006576/.nextflow/plugins; core-plugins: nf-amazon@3.9.1,nf-azure@1.22.5,nf-cloudcache@0.6.0,nf-codecommit@0.5.2,nf-console@1.3.0,nf-google@1.27.3,nf-k8s@1.5.4,nf-seqera@0.20.1,nf-tower@1.28.0,nf-wave@1.21.0
+Oct-23 11:45:01.201 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Oct-23 11:45:01.202 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Oct-23 11:45:01.205 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
+Oct-23 11:45:01.242 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Oct-23 11:45:01.388 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
+Oct-23 11:45:01.395 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Oct-23 11:45:01.427 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/../nextflow.config
+Oct-23 11:45:01.429 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/nextflow.config
+Oct-23 11:45:01.434 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+Oct-23 11:45:01.452 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Oct-23 11:45:01.801 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Oct-23 11:45:01.802 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Oct-23 11:45:01.816 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/c2006576/.nextflow/secrets/store.json
+Oct-23 11:45:01.819 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@6342d610] - activable => nextflow.secret.LocalSecretsProvider@6342d610
+Oct-23 11:45:01.834 [main] DEBUG nextflow.cli.CmdRun - Launching `bandage/main.nf` [berserk_kay] - revision: 3f841e50a4
+Oct-23 11:45:01.910 [main] DEBUG nextflow.Session - Session UUID: 360d3415-94d4-454a-8eae-1e3d41aed6d5
+Oct-23 11:45:01.910 [main] DEBUG nextflow.Session - Run name: berserk_kay
+Oct-23 11:45:01.911 [main] DEBUG nextflow.Session - Executor pool size: 8
+Oct-23 11:45:01.920 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Oct-23 11:45:01.925 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-23 11:45:01.945 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 26.04.3 build 12259
+  Created: 28-05-2026 08:48 UTC (09:48 BST)
+  System: Linux 6.12.0-211.22.1.el10_2.x86_64
+  Runtime: Groovy 4.0.31 on OpenJDK 64-Bit Server VM 25+36-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 1619818@c1-14 [192.168.0.73]
+  CPUs: 8 - Mem: 503.4 GB (35.4 GB) - Swap: 0 (0)
+Oct-23 11:45:01.966 [main] DEBUG nextflow.Session - Work-dir: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/work [nfs]
+Oct-23 11:45:01.966 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/bandage/bin
+Oct-23 11:45:01.974 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Oct-23 11:45:01.982 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Oct-23 11:45:01.983 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Oct-23 11:45:02.028 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Oct-23 11:45:02.037 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Oct-23 11:45:02.091 [main] DEBUG nextflow.Session - Session start
+Oct-23 11:45:02.096 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+Oct-23 11:45:02.274 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Oct-23 11:45:02.366 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Oct-23 11:45:02.367 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-23 11:45:02.378 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Oct-23 11:45:02.386 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Oct-23 11:45:02.387 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Oct-23 11:45:02.389 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Oct-23 11:45:02.425 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'bandage': maxForks=0; fair=false; array=0
+Oct-23 11:45:02.470 [main] DEBUG nextflow.Session - Process names: bandage
+Oct-23 11:45:02.472 [main] DEBUG nextflow.Session - Igniting dataflow network (1)
+Oct-23 11:45:02.473 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > bandage
+Oct-23 11:45:02.474 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Main: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/bandage/main.nf
+Oct-23 11:45:02.474 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Oct-23 11:45:02.474 [main] DEBUG nextflow.Session - Session await
+Oct-23 11:45:02.555 [Actor Thread 5] DEBUG nextflow.container.SingularityCache - Apptainer found local store for image=docker://community.wave.seqera.io/library/bandage:0.9.0--d08c11d75be5a14a; path=/mnt/scratch45/c2006576/singularity/cache/community.wave.seqera.io-library-bandage-0.9.0--d08c11d75be5a14a.img
+Oct-23 11:45:02.663 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process bandage > jobId: 135880; workDir: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/work/b5/9039af535f152b43b23c03946b69ea
+Oct-23 11:45:02.664 [Task submitter] INFO  nextflow.Session - [b5/9039af] Submitted process > bandage
+Oct-23 11:45:07.400 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 135880; id: 1; name: bandage; status: COMPLETED; exit: 1; error: -; workDir: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/work/b5/9039af535f152b43b23c03946b69ea started: 1792752307394; exited: 2026-10-23T10:45:03.34783648Z; ]
+Oct-23 11:45:07.401 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-23 11:45:07.410 [TaskFinalizer-1] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=bandage; work-dir=/mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/work/b5/9039af535f152b43b23c03946b69ea
+  error [nextflow.exception.ProcessFailedException]: Process `bandage` terminated with an error exit status (1)
+Oct-23 11:45:07.451 [TaskFinalizer-1] ERROR nextflow.processor.TaskProcessor - Error executing process > 'bandage'
+
+Caused by:
+  Process `bandage` terminated with an error exit status (1)
+
+
+Command executed:
+
+  Bandage image /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/results/assemblies/BCC0005/assembly.gfa bandage
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command error:
+  QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-c2006576'
+  
+  Bandage error: /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/results/assemblies/BCC0005/assembly.gfa does not exist
+
+Work dir:
+  /mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/modules/work/b5/9039af535f152b43b23c03946b69ea
+
+Container:
+  /mnt/scratch45/c2006576/singularity/cache/community.wave.seqera.io-library-bandage-0.9.0--d08c11d75be5a14a.img
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Oct-23 11:45:07.459 [TaskFinalizer-1] DEBUG nextflow.Session - Session aborted -- Cause: Process `bandage` terminated with an error exit status (1)
+Oct-23 11:45:07.462 [main] DEBUG nextflow.Session - Session await > all processes finished
+Oct-23 11:45:07.496 [TaskFinalizer-1] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=20ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=4; peakMemory=1 GB; ]
+Oct-23 11:45:07.674 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Oct-23 11:45:07.674 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Oct-23 11:45:07.676 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=20ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=4; peakMemory=1 GB; ]
+Oct-23 11:45:07.682 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Oct-23 11:45:07.691 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

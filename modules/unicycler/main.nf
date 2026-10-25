@@ -11,6 +11,7 @@ process unicycler {
 
         output:
 	path("${sample_id}/${sample_id}.fasta"), emit: assembly
+	path("${sample_id}/${sample_id}.gfa"), emit: assembly_gfa
 	path("${sample_id}/*"), emit: reports
 
         script:
@@ -23,7 +24,7 @@ process unicycler {
 		  -o ${sample_id}
 
 	mv "${sample_id}/assembly.fasta" "${sample_id}/${sample_id}.fasta"
+	mv "${sample_id}/assembly.gfa" "${sample_id}/${sample_id}.gfa"
         """
-
 }
 

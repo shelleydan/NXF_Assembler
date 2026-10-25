@@ -6,7 +6,11 @@ include { fastp } from './modules/fastp/main.nf'
 include { fastqc as fastqc_trim } from './modules/fastqc/main.nf'
 include { unicycler } from './modules/unicycler/main.nf'
 include { checkM2 } from './modules/checkM2/main.nf'
-//include { quast } from './modules/quast/main.nf'
+include { QUAST } from './modules/QUAST/main.nf'
+include { FastANI } from './modules/fastani/main.nf'
+include { FastANI as pairwiseFastANI } from './modules/fastani/main.nf'
+include { FastANIFormat } from './modules/fastani_format/main.nf'
+include { FastANIFormat as pairwiseFastANIFormat } from './modules/fastani_format/main.nf'
 
 /*
  * Pipeline Parameters
@@ -16,6 +20,7 @@ params {
 	fofn_input: Path = 'rawreads.csv'
 	checkm2_db: Path = '/mnt/scratch15/nodelete/c2006576/DATABASE'
 	tmpdir: Path = '/tmp'
+	fastani_db: Path = '/mnt/scratch15/nodelete/c2006576/DATABASE/FastANI/D1/references.csv'
 }
 
 /*
@@ -54,10 +59,43 @@ workflow {
 	checkM2_db_ch = Channel.fromPath(params.checkm2_db)
 	tmpdir_ch = Channel.fromPath(params.tmpdir)	
 
-
 	// QC of the Genome Assemblies
 	checkM2(unicycler.out.assembly.collect(), checkM2_db_ch, tmpdir_ch)
-	//quast(unicycler.out.assembly.map {ids, fasta -> fasta}.collect())
+	QUAST(unicycler.out.assembly.collect())
+
+	bandage(unicycler.out.assembly_gfa)
+
+	// FastANI Input CSV
+	fastani_input = unicycler.out.assembly
+		.map { assembly -> assembly.toString() }
+		.collectFile(name: 'assemblies.csv', newLine: true)
+		.map { csv ->
+			tuple(
+				"all_vs_all",
+				csv,
+				file(params.fastani_db)
+				)
+			}
+
+	pairwise_fastani_input = unicycler.out.assembly
+                .map { assembly -> assembly.toString() }
+                .collectFile(name: 'assemblies.csv', newLine: true)
+                .map { csv ->
+                        tuple(
+                                "all_vs_all",
+                                csv,
+                                csv
+                                )
+                        }
+
+
+	// FastANI & Formatting
+	FastANI(fastani_input)
+
+	pairwiseFastANI(pairwise_fastani_input)
+
+	FastANIFormat(FastANI.out.fastani_results)
+	pairwiseFastANIFormat(pairwiseFastANI.out.fastani_results)
 
 	publish:
 	fastqc_raw_reports=fastqc_raw.out
@@ -68,6 +106,9 @@ workflow {
 	unicycler_assemblies=unicycler.out.assembly
 	unicycler_reports=unicycler.out.reports
 	checkm2_reports=checkM2.out.reports
+	quast_reports=QUAST.out.reports
+	fastani_output=FastANIFormat.out
+	pairwisefastani_output=pairwiseFastANIFormat.out
 }
 
 output {
@@ -110,6 +151,22 @@ output {
 
 	checkm2_reports {
                 path '.'
+                mode 'copy'
+        }
+
+	quast_reports {
+                path '.'
+                mode 'copy'
+        }
+
+
+	fastani_output {
+               path 'fastani'
+                mode 'copy'
+        }
+
+	pairwisefastani_output {
+               path 'pairwise_fastani'
                 mode 'copy'
         }
 

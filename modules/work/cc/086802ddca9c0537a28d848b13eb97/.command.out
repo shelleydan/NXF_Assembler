@@ -1,0 +1,21 @@
+
+Bandage image will generate an image file of the graph visualisation without opening the GUI.
+
+Usage:    Bandage image <graph> <outputfile> [options]
+          
+Positional parameters:
+          <graph>             A graph file of any type supported by Bandage
+          <outputfile>        The image file to be created (must end in '.jpg', '.png' or '.svg')
+          
+Options:  --height <int>      Image height (default: 1000)
+          --width <int>       Image width (default: not set)
+          --color <file>       csv file with 2 column first the node name second the node color
+          
+          If only height or width is set, the other will be determined automatically. If both are set, the image will be exactly that size.
+          
+          --help              View this help message
+          --helpall           View all command line settings
+          --version           View Bandage version number
+          
+Online Bandage help: https://github.com/rrwick/Bandage/wiki
+          
