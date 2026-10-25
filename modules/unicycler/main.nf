@@ -3,7 +3,7 @@
 process unicycler {
 
         cpus 8
-        memory '8 GB'
+        memory '16 GB'
         container 'community.wave.seqera.io/library/unicycler:0.5.1--65ba988046680154'
 
         input:
@@ -15,12 +15,16 @@ process unicycler {
 	path("${sample_id}/*"), emit: reports
 
         script:
+
+	def mem_gb = task.memory.giga as int
+
         """
         mkdir -p ${sample_id}
 
         unicycler -1 ${r1} \
 		  -2 ${r2} \
 		  -t ${task.cpus} \
+		  --spades_options "-m ${mem_gb}" \
 		  -o ${sample_id}
 
 	mv "${sample_id}/assembly.fasta" "${sample_id}/${sample_id}.fasta"

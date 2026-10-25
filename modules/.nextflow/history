@@ -1,7 +1,0 @@
-2026-10-23 11:37:17	-	stupefied_venter	-	7e8ad773529f45e460beb33b7912bfba	dafbaa56-5562-4d31-a2dd-823c7076deac	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:37:37	-	voluminous_colden	-	c69fa4683dd50d76b4ab2a092c614ce1	7a35d982-92b5-41a1-847f-fb8c4451df84	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:38:25	56.7s	golden_saha	ERR	e9e4d59839c34ba46047bc050e4b75ae	90f86839-41cd-4667-85ca-dda72ba128d6	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:42:09	11.5s	peaceful_almeida	OK	9c0b4d9755c8ab13b0e0bf0d75629150	7e18bca2-97a7-4e63-897a-7d0a330884d4	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:43:38	11.1s	deadly_einstein	OK	0a33496c3aebe20fa24ad00710688009	9e93ab5c-743c-401d-a72b-59fee422674d	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:45:01	6.7s	berserk_kay	ERR	3f841e50a464bff9ed7dbd6bde6ff6e9	360d3415-94d4-454a-8eae-1e3d41aed6d5	nextflow run bandage/main.nf -c ../nextflow.config
-2026-10-23 11:48:37	10.9s	fervent_stonebraker	OK	8ca55928e4fd8b305ab380f1977dfdb9	386308f1-c1d6-418e-8de0-9662c91f6035	nextflow run bandage/main.nf -c ../nextflow.config

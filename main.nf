@@ -5,22 +5,26 @@ include { fastqc as fastqc_raw } from './modules/fastqc/main.nf'
 include { fastp } from './modules/fastp/main.nf'
 include { fastqc as fastqc_trim } from './modules/fastqc/main.nf'
 include { unicycler } from './modules/unicycler/main.nf'
+include { bakta } from './modules/bakta/main.nf'
 include { checkM2 } from './modules/checkM2/main.nf'
 include { QUAST } from './modules/QUAST/main.nf'
 include { FastANI } from './modules/fastani/main.nf'
 include { FastANI as pairwiseFastANI } from './modules/fastani/main.nf'
 include { FastANIFormat } from './modules/fastani_format/main.nf'
 include { FastANIFormat as pairwiseFastANIFormat } from './modules/fastani_format/main.nf'
+include { Bandage } from './modules/bandage/main.nf'
+include { multiqc } from './modules/multiqc/main.nf'
 
 /*
  * Pipeline Parameters
  */
 
 params {
-	fofn_input: Path = 'rawreads.csv'
+	fofn_input: Path = 'test.csv'
 	checkm2_db: Path = '/mnt/scratch15/nodelete/c2006576/DATABASE'
 	tmpdir: Path = '/tmp'
 	fastani_db: Path = '/mnt/scratch15/nodelete/c2006576/DATABASE/FastANI/D1/references.csv'
+	bakta_db = '/mnt/scratch15/nodelete/c2006576/DATABASE/bakta_db/db'
 }
 
 /*
@@ -56,14 +60,19 @@ workflow {
 	// Genome Assembly
 	unicycler(fastp.out.trimmed_reads)
 
-	checkM2_db_ch = Channel.fromPath(params.checkm2_db)
-	tmpdir_ch = Channel.fromPath(params.tmpdir)	
+	// Bacterial Annotations with Bakta
 
+	bakta_db_ch = Channel.value(params.bakta_db)
+	tmpdir_ch = Channel.value(params.tmpdir)
+	bakta(bakta_db_ch, tmpdir_ch, unicycler.out.assembly)
+
+	checkM2_db_ch = Channel.value(params.checkm2_db)
+	
 	// QC of the Genome Assemblies
 	checkM2(unicycler.out.assembly.collect(), checkM2_db_ch, tmpdir_ch)
 	QUAST(unicycler.out.assembly.collect())
 
-	bandage(unicycler.out.assembly_gfa)
+	Bandage(unicycler.out.assembly_gfa)
 
 	// FastANI Input CSV
 	fastani_input = unicycler.out.assembly
@@ -97,6 +106,18 @@ workflow {
 	FastANIFormat(FastANI.out.fastani_results)
 	pairwiseFastANIFormat(pairwiseFastANI.out.fastani_results)
 
+	// MultiQC Report Generation
+	multiqc_input = Channel.empty()
+
+	multiqc_input = multiqc_input.mix(fastqc_raw.out)
+	multiqc_input = multiqc_input.mix(fastqc_trim.out)
+	multiqc_input = multiqc_input.mix(fastp.out.html)
+	multiqc_input = multiqc_input.mix(fastp.out.json)
+	multiqc_input = multiqc_input.mix(QUAST.out.reports)
+	multiqc_input = multiqc_input.mix(checkM2.out.reports)
+
+	multiqc(multiqc_input.collect())
+
 	publish:
 	fastqc_raw_reports=fastqc_raw.out
 	fastp_trimmed=fastp.out.trimmed_reads
@@ -109,6 +130,9 @@ workflow {
 	quast_reports=QUAST.out.reports
 	fastani_output=FastANIFormat.out
 	pairwisefastani_output=pairwiseFastANIFormat.out
+	bandage_images=Bandage.out
+	bakta_annotations=bakta.out
+	multiqc_report=multiqc.out.report
 }
 
 output {
@@ -167,7 +191,22 @@ output {
 
 	pairwisefastani_output {
                path 'pairwise_fastani'
-                mode 'copy'
+               mode 'copy'
+        }
+	
+	bandage_images {
+               path 'bandage'
+               mode 'copy'
+        }
+
+	bakta_annotations {
+               path '.'
+               mode 'copy'
+        }
+
+	multiqc_report {
+               path './multiqc'
+               mode 'copy'
         }
 
 }	

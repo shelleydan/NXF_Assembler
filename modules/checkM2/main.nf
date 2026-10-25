@@ -8,8 +8,8 @@ process checkM2 {
 
         input:
         path(assemblies)
-	path(checkM2_db)
-	path(tmpdir)
+	val(checkM2_db)
+	val(tmpdir)
 
         output:
 	path("checkM2/*"), emit: reports	

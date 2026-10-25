@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-process bandage {
+process Bandage {
 
         cpus 4
         memory '1 GB'
@@ -10,15 +10,15 @@ process bandage {
         path(assembly_gfa)
 	
         output:
-	stdout
-	path "bandage.svg"	
+	path "*_bandage.svg"	
 
         script:
-        """
-	Bandage image ${assembly_gfa} bandage.svg
+        
+	def base = assembly_gfa.baseName
+
+	"""
+	Bandage image ${assembly_gfa} ${base}_bandage.svg --height 500 --width 500
         """
 }
 
-workflow {
-	bandage(file('/mnt/scratch45/c2006576/PhD_SWBio_2026_2030/RP1_SWBIO_OCT26_FEB27/multivoran_assemblies/assembler_nextflow/results/assemblies/BCC0005/assembly.gfa'))
-}
+
