@@ -3,7 +3,8 @@
 process QUAST {
 
         cpus 8
-        memory { assemblies.size() * 1.GB }
+        memory '4 GB'
+	//memory { assemblies.size() * 1.GB }
         container 'community.wave.seqera.io/library/quast:5.3.0--77e72857b4af9b37'
 
         input:
@@ -25,7 +26,7 @@ process QUAST {
 		ln -s "\$(realpath "\$file_genome")" genomes/
 		done
 
-	quast.py -t ${task.cpu} \
+	quast.py -t ${task.cpus} \
 	 	 -o  quast \
 	 	 genomes/*
         """

@@ -3,13 +3,15 @@
 process checkM2 {
 
         cpus 8
-        memory { assemblies.size() * 1.GB }
+	memory '8 GB'
+        //memory { (assemblies instanceof List ? assemblies.size() : 1) * 1.GB }
+	//memory { assemblies.countFasta() * 1.GB }
         container 'community.wave.seqera.io/library/checkm2:1.1.0--2155b1d4034fecdc'
 
         input:
         path(assemblies)
-	val(checkM2_db)
-	val(tmpdir)
+	path(checkM2_db)
+	path(tmpdir)
 
         output:
 	path("checkM2/*"), emit: reports	

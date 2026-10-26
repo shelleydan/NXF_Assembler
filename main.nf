@@ -63,10 +63,10 @@ workflow {
 	// Bacterial Annotations with Bakta
 
 	bakta_db_ch = Channel.value(params.bakta_db)
-	tmpdir_ch = Channel.value(params.tmpdir)
-	bakta(bakta_db_ch, tmpdir_ch, unicycler.out.assembly)
+	tmpdir_ch = Channel.fromPath(params.tmpdir)
+	bakta(bakta_db_ch, unicycler.out.assembly)
 
-	checkM2_db_ch = Channel.value(params.checkm2_db)
+	checkM2_db_ch = Channel.fromPath(params.checkm2_db)
 	
 	// QC of the Genome Assemblies
 	checkM2(unicycler.out.assembly.collect(), checkM2_db_ch, tmpdir_ch)
@@ -75,16 +75,15 @@ workflow {
 	Bandage(unicycler.out.assembly_gfa)
 
 	// FastANI Input CSV
+	fastani_db_ch = Channel.fromPath(params.fastani_db)
+
 	fastani_input = unicycler.out.assembly
-		.map { assembly -> assembly.toString() }
-		.collectFile(name: 'assemblies.csv', newLine: true)
-		.map { csv ->
-			tuple(
-				"all_vs_all",
-				csv,
-				file(params.fastani_db)
-				)
-			}
+    		.map { it.toString() }
+    		.collectFile(name: 'assemblies.csv', newLine: true)
+    		.combine(fastani_db_ch)
+    		.map { csv, refs ->
+        		tuple("all_vs_all", csv, refs)
+    		}
 
 	pairwise_fastani_input = unicycler.out.assembly
                 .map { assembly -> assembly.toString() }
